@@ -8,6 +8,8 @@ public class Test : MonoBehaviour {
     public float angVel;
     public GameObject wheel;
 
+    public float timer;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -17,5 +19,6 @@ public class Test : MonoBehaviour {
 	void Update () {
         vel = gameObject.GetComponent<Rigidbody2D>().velocity;
         angVel = wheel.GetComponent<Rigidbody2D>().angularVelocity;
+        timer += Time.deltaTime;
 	}
 }

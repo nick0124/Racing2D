@@ -23,13 +23,14 @@ public class CarMove : MonoBehaviour {
         {
             foreach (var wheel in wheels)
             {
-                startVel = wheel.GetComponent<Rigidbody2D>().angularVelocity;
+                curTorque = wheel.GetComponent<Rigidbody2D>().angularVelocity;
+                //startVel = wheel.GetComponent<Rigidbody2D>().angularVelocity;
             }
         }
 
 		if(Input.GetKey(KeyCode.D))
         {
-            if (curTorque + startVel < maxTorque)
+            if (curTorque < maxTorque)
             {
                 curTorque += acceleration;
             }
@@ -41,7 +42,7 @@ public class CarMove : MonoBehaviour {
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            if (curTorque + startVel > -maxTorque)
+            if (curTorque > -maxTorque)
             {
                 curTorque -= acceleration;
             }
@@ -53,10 +54,11 @@ public class CarMove : MonoBehaviour {
         }
         else
         {
-            curTorque = 0;
+            
 
             foreach (var wheel in wheels)
             {
+                curTorque = -wheel.GetComponent<Rigidbody2D>().angularVelocity;
                 wheel.GetComponent<Rigidbody2D>().angularVelocity = wheel.GetComponent<Rigidbody2D>().angularVelocity;//AddTorque(-curTorque);
             }
         }
